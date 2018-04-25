@@ -2,7 +2,9 @@ package com.example.hyunwook.weathercast
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.TextView
 import com.example.hyunwook.weathercast.data.CityArray
+import com.example.hyunwook.weathercast.data.CityData
 import com.google.gson.Gson
 import java.io.InputStreamReader
 
@@ -19,7 +21,18 @@ class SelectCityActivity : AppCompatActivity() {
         val cityData: CityArray = Gson().fromJson(inputStream, CityArray::class.java)
 
         val adapter = CityListAdapter(this, cityData.city)
-        city_list.adapter
+        city_list.adapter = adapter
+        city_list.setOnItemClickListener { adapterView, view, i, l ->
+            val text: TextView = view.findViewById(R.id.city_name) as TextView
+            saveData(view.tag as String, text.text as String)
+            setResult(MainActivity.SELECTED_CITY)
+            finish()
+        }
+    }
+
+    fun saveData(api_id: String, name: String) {
+        val db = DBHandlerAnko(this)
+        db.saveCity(CityData(api_id, name))
     }
 } {
 }
