@@ -6,6 +6,7 @@ import android.widget.TextView
 import com.example.hyunwook.weathercast.data.CityArray
 import com.example.hyunwook.weathercast.data.CityData
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_select_city.*
 import java.io.InputStreamReader
 
 /**
